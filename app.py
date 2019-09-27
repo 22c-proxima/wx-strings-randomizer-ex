@@ -10,19 +10,31 @@ class IrinaFrame(wx.Frame):
 		super(IrinaFrame, self).__init__(*args, **kwargs)
 		self.Center()
 
+		captionSizerStyle = wx.EXPAND|wx.TOP
+
+		sCaptions = wx.BoxSizer(wx.HORIZONTAL)
+		pSourceCaption = wx.Panel(self, size = wx.Size(100, 20))
+		wx.StaticText(pSourceCaption, label = 'Исходные данные')
+		sCaptions.Add(pSourceCaption, 1, captionSizerStyle, 2)
+		pResultCaption = wx.Panel(self, size = wx.Size(100, 20))
+		wx.StaticText(pResultCaption, label = 'Результат')
+		sCaptions.Add(pResultCaption, 1, captionSizerStyle, 2)
+
+		defaultSizerStyle = wx.EXPAND|wx.ALL
+
 		sTextBoxes = wx.BoxSizer(wx.HORIZONTAL)
 		styleTextCtrl = wx.TE_MULTILINE|wx.TE_DONTWRAP
 		self.tcSource = wx.TextCtrl(self, style = styleTextCtrl)
 		self.tcResult = wx.TextCtrl(self, style = styleTextCtrl|wx.TE_READONLY)
-		sizerTextStyle = wx.EXPAND|wx.ALL
-		sTextBoxes.Add(self.tcSource, 1, sizerTextStyle, 2)
-		sTextBoxes.Add(self.tcResult, 1, sizerTextStyle, 2)
+		sTextBoxes.Add(self.tcSource, 1, defaultSizerStyle, 2)
+		sTextBoxes.Add(self.tcResult, 1, defaultSizerStyle, 2)
 
 		sButton = wx.BoxSizer(wx.HORIZONTAL)
 		bRandomize = wx.Button(self, -1, 'Перемешать')
-		sButton.Add(bRandomize, 1, wx.EXPAND|wx.ALL, 2)
+		sButton.Add(bRandomize, 1, defaultSizerStyle, 2)
 
 		sMain = wx.BoxSizer(wx.VERTICAL)
+		sMain.Add(sCaptions, 0, wx.EXPAND, 0)
 		sMain.Add(sTextBoxes, 1, wx.EXPAND, 0)
 		sMain.Add(sButton, 0, wx.EXPAND, 0)
 		self.SetSizer(sMain)
